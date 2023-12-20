@@ -13,4 +13,6 @@ class Node:
         self.serviceList = serviceList
 
     def __str__(self):
-        return f"name:{self.name}, serviceList:{self.serviceList}"
+        # 使用{{和}}表示普通的大括号
+        serviceInfo = ", ".join(str(service) for service in self.serviceList)
+        return f"nodeName:{self.name}, serviceList:{{ {serviceInfo} }}"

@@ -14,3 +14,5 @@ class Link:
 
     def __str__(self):
         return f"name:{self.name}, bandwidth:{self.bandwidth}, delay:{self.delay}"
+
+

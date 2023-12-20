@@ -3,6 +3,8 @@
 @Date：2023/12/20 16:03
 @Python：3.9
 """
+from pojo.node import Node
+from pojo.service import Service
 
 
 # 描述当前网络环境
@@ -16,8 +18,3 @@ class Environment:
         self.dst = dst
         # 链路信息
         self.links = links
-
-# if __name__ == '__main__':
-# Service1 = Service("samba", 500, 0.8)
-# Service2 = Service("sql", 400, 0.5)
-# R1 = Node("R1", [Service1, Service2])
