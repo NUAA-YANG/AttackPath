@@ -4,6 +4,7 @@
 @Python：3.9
 """
 
+
 # 描述链路性能
 class Link:
     def __init__(self, name, bandwidth, delay):

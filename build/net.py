@@ -8,9 +8,9 @@ import torch.nn.functional as F
 
 
 # 用于构建深度神经网络
-class MyNet(nn.Module):
+class Net(nn.Module):
     def __init__(self, states, actions):
-        super(MyNet, self).__init__()
+        super(Net, self).__init__()
         # 创建一个线形层
         self.f1 = nn.Linear(states, 64)
         # 创建第二个线性层

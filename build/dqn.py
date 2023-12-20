@@ -4,7 +4,7 @@
 @Python：3.9
 """
 import torch
-from Net import MyNet
+from net import Net
 import torch.nn as nn
 import numpy as np
 import matplotlib.pyplot as plt
@@ -33,9 +33,9 @@ class DQN:
         self.batchSize = batchSize
 
         # 创建一个eval网络，计算当前状态下的 Q 值，估计当前策略的质量
-        self.evalNet = MyNet(states, actions)
+        self.evalNet = Net(states, actions)
         # 创建一个target网络，计算目标 Q 值，提供一个相对稳定的目标值
-        self.targetNet = MyNet(states, actions)
+        self.targetNet = Net(states, actions)
         # 损失函数
         self.loss = nn.MSELoss()
         # 优化器
