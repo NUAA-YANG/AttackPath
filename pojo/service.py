@@ -20,8 +20,14 @@ class Service:
         self.confidentiality = confidentiality
         # 被攻陷概率：{0-1}
         self.probability = probability
+        # 综合得分，初始化为0
+        self.score = 0
 
     # 输出
-    def __str__(self):
+    def strService(self):
         return f"[serviceName:{self.name},complexity:{self.complexity},complexity:{self.needInteraction}," \
                f"complexity:{self.confidentiality},probability:{self.probability}]"
+
+    # 输出
+    def strScore(self):
+        return f"[serviceName:{self.name},score:{self.score},probability:{self.probability}]"

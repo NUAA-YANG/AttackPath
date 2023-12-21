@@ -4,6 +4,7 @@
 @Python：3.9
 """
 
+from service import Service
 
 # 节点类
 class Node:
@@ -12,7 +13,12 @@ class Node:
         self.name = name
         self.serviceList = serviceList
 
-    def __str__(self):
+    def strNodeService(self):
         # 使用{{和}}表示普通的大括号
-        serviceInfo = ", ".join(str(service) for service in self.serviceList)
+        serviceInfo = ", ".join(Service.strService(ser) for ser in self.serviceList)
+        return f"nodeName:{self.name}, serviceList:{{ {serviceInfo} }}"
+
+    def strNodeScore(self):
+        # 使用{{和}}表示普通的大括号
+        serviceInfo = ", ".join(Service.strScore(service) for service in self.serviceList)
         return f"nodeName:{self.name}, serviceList:{{ {serviceInfo} }}"

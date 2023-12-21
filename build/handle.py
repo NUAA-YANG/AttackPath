@@ -21,7 +21,9 @@ def normalizeService(service):
     needInteractionMap = {"yes": 0.9, "no": 0.6}
     # 机密性越高越好
     confidentialityMap = {"low": 0.4, "medium": 0.7, "high": 0.9}
-    return complexityMap.get(service.complexity, 0) + needInteractionMap.get(service.needInteraction, 0) + confidentialityMap.get(service.confidentiality, 0)
+    # 赋值得分
+    service.score = round(complexityMap.get(service.complexity, 0) + needInteractionMap.get(service.needInteraction, 0) + confidentialityMap.get(service.confidentiality, 0),2)
+    return service
 
 
 # 获取需要运行的服务
@@ -50,11 +52,11 @@ def getServiceByName(name):
         # tfp文件存储服务器
         return Service(name="vsftpd", complexity="low", needInteraction="no", confidentiality="low",
                        probability=0.4)
-    elif name == "sql":
+    elif name == "dns":
         # 域名服务
         return Service(name="dns", complexity="medium", needInteraction="no", confidentiality="medium",
                        probability=0.5)
-    elif name == "sql":
+    elif name == "vpn":
         # 虚拟专用网
         return Service(name="vpn", complexity="high", needInteraction="yes", confidentiality="high",
                        probability=0.8)
@@ -64,6 +66,8 @@ def getServiceByName(name):
 
 # 归一化处理链路参数
 def normalizeLink(linkList):
+    # 用于记录链路的值
+    linkMap = {}
     # 链路的带宽最小值和最大值
     bandwidthMax = linkList[0].bandwidth
     bandwidthMin = linkList[0].bandwidth
@@ -80,7 +84,10 @@ def normalizeLink(linkList):
     for link in linkList:
         link.bandwidth = normalization(link.bandwidth, bandwidthMax, bandwidthMin)
         link.delay = normalization(link.delay, delayMax, delayMin)
-    return linkList
+        # 带宽越大越好，时延越小越好，所以相减
+        linkMap[link.name] = link.bandwidth - link.delay
+    # 返回归一化处理后的链路表和链路键值对
+    return linkList, linkMap
 
 
 
